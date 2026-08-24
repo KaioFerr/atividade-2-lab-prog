@@ -16,7 +16,7 @@ public class Ebook extends Livro{
 
     @Override
     public void descricao() {
-        System.out.println("Titulo: " + getTitulo() + "\nAutor: " + getAutor() + "\nNúmero de Página: " + getNumPagina() + "\nTamanho do Arquivo: " + getTamanhoArquivo());
+        System.out.println("Titulo: " + getTitulo() + "\nAutor: " + getAutor() + "\nNúmero de Página: " + getNumPagina() + "\nTamanho do Arquivo: " + getTamanhoArquivo() + " MB");
     }
 
     @Override
