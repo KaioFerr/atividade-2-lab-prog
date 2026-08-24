@@ -1,11 +1,15 @@
+import org.jetbrains.annotations.Nullable;
+
 public class LivroFisico extends Livro{
 
+    @Nullable
     private Double peso;
 
     public LivroFisico() {
         super();
     }
 
+    @Nullable
     public Double getPeso() {
         return peso;
     }
@@ -16,7 +20,7 @@ public class LivroFisico extends Livro{
 
     @Override
     public void descricao(){
-        System.out.println("Titulo: " + getTitulo() + "\nAutor: " + getAutor() + "\nNúmero de Página: " + getNumPagina() + "\nPeso: " + getPeso());
+        System.out.println("\nID: " + getId() + "\nTitulo: " + getTitulo() + "\nAutor: " + getAutor() + "\nNúmero de Página: " + getNumPagina() + "\nPeso: " + getPeso());
     }
 
     @Override

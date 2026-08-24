@@ -1,11 +1,15 @@
+import org.jetbrains.annotations.Nullable;
+
 public class Ebook extends Livro{
 
+    @Nullable
     private Double tamanhoArquivo;
 
     public Ebook() {
         super();
     }
 
+    @Nullable
     public Double getTamanhoArquivo() {
         return tamanhoArquivo;
     }
@@ -16,7 +20,7 @@ public class Ebook extends Livro{
 
     @Override
     public void descricao() {
-        System.out.println("Titulo: " + getTitulo() + "\nAutor: " + getAutor() + "\nNúmero de Página: " + getNumPagina() + "\nTamanho do Arquivo: " + getTamanhoArquivo() + " MB");
+        System.out.println("\nID: " + getId() + "\nTitulo: " + getTitulo() + "\nAutor: " + getAutor() + "\nNúmero de Página: " + getNumPagina() + "\nTamanho do Arquivo: " + getTamanhoArquivo() + " MB");
     }
 
     @Override

@@ -20,6 +20,15 @@ public class Main {
 
         biblioteca.listarLivros();
 
-        biblioteca.buscarLivroPorTitulo("A vida de avi Moreira");
+        biblioteca.obterLivroPorId(ebook.getId());
+
+        Ebook ebookAtualizado = new Ebook();
+        ebookAtualizado.setTitulo("Vida do Canelão");
+        ebookAtualizado.setAutor(null);
+        ebookAtualizado.setNumPagina(null);
+        ebookAtualizado.setTamanhoArquivo(null);
+
+        biblioteca.atualizarLivroPorId(ebook.getId(), ebookAtualizado);
+        biblioteca.listarLivros();
     }
 }

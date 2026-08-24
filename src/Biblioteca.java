@@ -26,8 +26,9 @@ public class Biblioteca {
     public Livro obterLivroPorId(UUID id) throws Exception{
         try{
             for(Livro livro : livros){
+                assert livro.getId() != null;
                 if (livro.getId().equals(id)) {
-                    System.out.println("\n\nLivro encontrado: " + livro.getId());
+                    livro.descricao();
                     return livro;
                 }
             }
