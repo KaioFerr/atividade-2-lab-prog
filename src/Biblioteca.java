@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Biblioteca {
 
@@ -22,17 +23,37 @@ public class Biblioteca {
         livros.forEach(Livro::descricao);
     }
 
-    public Livro buscarLivroPorTitulo(String titulo) throws Exception{
+    public Livro obterLivroPorId(UUID id) throws Exception{
         try{
             for(Livro livro : livros){
-                if (livro.getTitulo().equals(titulo)) {
-                    System.out.println("\n\nTitulo do Livro encontrado: " + livro.getTitulo());
+                if (livro.getId().equals(id)) {
+                    System.out.println("\n\nLivro encontrado: " + livro.getId());
                     return livro;
-                }else throw new Exception("Livro não encontrado");
+                }
             }
         }catch (Exception e){
-            System.out.println("Livro não encontrado");
+            System.out.println(e + ": Livro não encontrado");
         }
         return null;
+    }
+
+    public Boolean deletarLivroPorId(UUID id) throws Exception {
+        try{
+           Livro livroEncontrado = obterLivroPorId(id);
+           return livros.remove(livroEncontrado);
+        }catch (Exception e){
+            System.out.println(e + " Erro ao deletar livro");
+        }
+        return false;
+    }
+
+    public Livro atualizarLivroPorId (UUID id, Livro dadosAtualizado) throws Exception{
+        try {
+            Livro encontrado = obterLivroPorId(id);
+            encontrado.atualizaDados(dadosAtualizado);
+            return encontrado;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
