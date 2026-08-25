@@ -30,5 +30,9 @@ public class Main {
 
         biblioteca.atualizarLivroPorId(ebook.getId(), ebookAtualizado);
         biblioteca.listarLivros();
+
+        Usuario novoUsuario = biblioteca.cadastrarUsuario("09871214642", "Kaio Ferreira");
+        biblioteca.alugarLivro(ebook, novoUsuario, 30);
+        biblioteca.listarLocacao();
     }
 }

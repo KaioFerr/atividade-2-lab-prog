@@ -1,10 +1,13 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class Biblioteca {
 
-    private List<Livro> livros = new ArrayList<>();
+    private final List<Livro> livros = new ArrayList<>();
+    private final List<Usuario> usuarios = new ArrayList<>();
+    private final List<Locacao> locacoes = new ArrayList<>();
 
     public Biblioteca() {
         super();
@@ -43,18 +46,63 @@ public class Biblioteca {
            Livro livroEncontrado = obterLivroPorId(id);
            return livros.remove(livroEncontrado);
         }catch (Exception e){
-            System.out.println(e + " Erro ao deletar livro");
+            throw new RuntimeException("Erro ao deletar livro");
         }
-        return false;
     }
 
-    public Livro atualizarLivroPorId (UUID id, Livro dadosAtualizado) throws Exception{
+    public void atualizarLivroPorId (UUID id, Livro dadosAtualizado) throws Exception{
         try {
             Livro encontrado = obterLivroPorId(id);
             encontrado.atualizaDados(dadosAtualizado);
-            return encontrado;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao atualizar livro");
         }
+    }
+
+    public Usuario cadastrarUsuario (String cpf, String nome) throws Exception {
+        try {
+            if (cpf.length() > 11) throw new RuntimeException("CPF com mais de 11 dígitos");
+
+            Usuario usuarioNovo = Usuario.builder()
+                    .nome(nome)
+                    .cpf(cpf)
+                    .build();
+
+            System.out.println("\nUsuário cadastrado");
+
+            return usuarioNovo;
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Erro ao cadastrar usuário");
+        }
+    }
+
+    public List<Usuario> listarUsuarios() {
+        return usuarios;
+    }
+
+    public void alugarLivro (Livro livro, Usuario usuario, Integer qtdDias) throws Exception{
+        try{
+            LocalDateTime agora = LocalDateTime.now();
+
+            Locacao novaLocacao = Locacao.builder()
+                    .usuario(usuario)
+                    .livroAlugado(livro)
+                    .dataInicio(agora)
+                    .dataFim(agora.plusDays(qtdDias))
+                    .build();
+
+            locacoes.add(novaLocacao);
+
+            System.out.println("\nLocação cadastrada");
+
+        }catch (RuntimeException e) {
+            throw new RuntimeException("Erro ao alugar livro");
+        }
+    }
+
+    public void listarLocacao() {
+        System.out.println("\nLocações:");
+        locacoes.forEach(Locacao::descricao);
     }
 }
