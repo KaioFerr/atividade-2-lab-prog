@@ -6,11 +6,13 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @ToString
 @Builder
 public class Locacao {
+    private UUID id = UUID.randomUUID();
     private Livro livroAlugado;
     private Usuario usuario;
     private LocalDateTime dataInicio;
