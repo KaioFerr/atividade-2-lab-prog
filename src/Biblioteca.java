@@ -81,6 +81,17 @@ public class Biblioteca {
         return usuarios;
     }
 
+    public Locacao obterLocacaoPorId(UUID id) {
+        try{
+            for (Locacao locacao : locacoes) {
+                if (locacao.getId().equals(id)) return locacao;
+            }
+        }catch (RuntimeException e) {
+            throw new RuntimeException("Locação não encontrada");
+        }
+        return null;
+    }
+
     public void alugarLivro (Livro livro, Usuario usuario, Integer qtdDias) {
         try{
             LocalDateTime agora = LocalDateTime.now();
@@ -94,10 +105,19 @@ public class Biblioteca {
 
             locacoes.add(novaLocacao);
 
-            System.out.println("\nLocação cadastrada");
+            System.out.println("\nLocação cadastrada!");
 
         }catch (RuntimeException e) {
             throw new RuntimeException("Erro ao alugar livro");
+        }
+    }
+
+    public void encerrarEmprestimoPorId(UUID locacaoId) {
+        try {
+            Locacao locacaoEncontrada = obterLocacaoPorId(locacaoId);
+            if (locacaoEncontrada != null) locacoes.remove(locacaoEncontrada);
+        }catch (RuntimeException e) {
+            throw new RuntimeException("Erro ao remover locação");
         }
     }
 
