@@ -13,12 +13,12 @@ public class Biblioteca {
         super();
     }
 
-    public void adicionarLivro(Livro livro) throws Exception{
+    public void adicionarLivro(Livro livro) {
         try{
             livros.add(livro);
             System.out.println("livro adicionado...");
         }catch (Exception e){
-            System.out.println("livro não adicionado...");
+            throw new RuntimeException("livro não adicionado...");
         }
     }
 
@@ -26,7 +26,7 @@ public class Biblioteca {
         livros.forEach(Livro::descricao);
     }
 
-    public Livro obterLivroPorId(UUID id) throws Exception{
+    public Livro obterLivroPorId(UUID id) {
         try{
             for(Livro livro : livros){
                 assert livro.getId() != null;
@@ -41,7 +41,7 @@ public class Biblioteca {
         return null;
     }
 
-    public Boolean deletarLivroPorId(UUID id) throws Exception {
+    public Boolean deletarLivroPorId(UUID id) {
         try{
            Livro livroEncontrado = obterLivroPorId(id);
            return livros.remove(livroEncontrado);
@@ -50,7 +50,7 @@ public class Biblioteca {
         }
     }
 
-    public void atualizarLivroPorId (UUID id, Livro dadosAtualizado) throws Exception{
+    public void atualizarLivroPorId (UUID id, Livro dadosAtualizado) {
         try {
             Livro encontrado = obterLivroPorId(id);
             encontrado.atualizaDados(dadosAtualizado);
@@ -59,7 +59,7 @@ public class Biblioteca {
         }
     }
 
-    public Usuario cadastrarUsuario (String cpf, String nome) throws Exception {
+    public Usuario cadastrarUsuario (String cpf, String nome) {
         try {
             if (cpf.length() > 11) throw new RuntimeException("CPF com mais de 11 dígitos");
 
@@ -81,7 +81,7 @@ public class Biblioteca {
         return usuarios;
     }
 
-    public void alugarLivro (Livro livro, Usuario usuario, Integer qtdDias) throws Exception{
+    public void alugarLivro (Livro livro, Usuario usuario, Integer qtdDias) {
         try{
             LocalDateTime agora = LocalDateTime.now();
 
