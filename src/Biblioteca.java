@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Biblioteca {
@@ -19,6 +20,24 @@ public class Biblioteca {
             System.out.println("livro adicionado...");
         }catch (Exception e){
             throw new RuntimeException("livro não adicionado...");
+        }
+    }
+
+    public void adicionarLivro(LivroFisico livroFisico){
+        try{
+            livros.add(livroFisico);
+            System.out.println("Livro adicionado");
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao adicionar o livro");
+        }
+    }
+
+    public void adicionarLivro(Ebook ebook){
+        try{
+            livros.add(ebook);
+            System.out.println("Livro adicionado");
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao adicionar o livro");
         }
     }
 
@@ -59,7 +78,7 @@ public class Biblioteca {
         }
     }
 
-    public Usuario cadastrarUsuario (String cpf, String nome) {
+    public void cadastrarUsuario (String cpf, String nome) {
         try {
             if (cpf.length() > 11) throw new RuntimeException("CPF com mais de 11 dígitos");
 
@@ -67,13 +86,21 @@ public class Biblioteca {
                     .nome(nome)
                     .cpf(cpf)
                     .build();
-
+            usuarios.add(usuarioNovo);
             System.out.println("\nUsuário cadastrado");
-
-            return usuarioNovo;
 
         } catch (RuntimeException e) {
             throw new RuntimeException("Erro ao cadastrar usuário");
+        }
+    }
+
+    public Optional<Usuario> loginoPorCPF (String cpf) {
+        try {
+            return usuarios.stream()
+                    .filter(u -> u.getCpf().equals(cpf))
+                    .findFirst();
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Usuário não encontrado");
         }
     }
 
